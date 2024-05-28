@@ -1,5 +1,6 @@
+// import { PDFParser } from "../../../../parser/src/pdf-resume/index";
+import { PDFParser } from "@reactive-resume/parser";
 import { describe, expect, it } from "vitest";
-//import { PDFParser } from '../../../../parser/src/pdf-resume/index.ts';
 describe("Hello World Test", () => {
   it("should return Hello World", () => {
     // eslint-disable-next-line unicorn/consistent-function-scoping
@@ -8,14 +9,14 @@ describe("Hello World Test", () => {
   });
 });
 
-// describe("PDFParser Tests", () => {
-//   it("should initialize an empty PDFParser object", () => {
-//     const parser = new PDFParser();
+describe("PDFParser Tests", () => {
+  it("should initialize an empty PDFParser object", () => {
+    const parser = new PDFParser();
 
-//     // Initially, let's say we expect a method `parse` to exist, which doesn't yet
-//     expect(typeof parser.parse).toBe("function");
-//   });
-// });
+    // Initially, let's say we expect a method `parse` to exist, which doesn't yet
+    // expect(typeof parser.parse).toBe("function");
+  });
+});
 
 // describe("PDFParser functionality", () => {
 //   let parser: PDFParser;
