@@ -1,6 +1,27 @@
-// import { PDFParser } from "../../../../parser/src/pdf-resume/index";
-import { PDFParser } from "@reactive-resume/parser";
-import { describe, expect, it } from "vitest";
+/* eslint-disable unicorn/prefer-module */
+import * as fs from "node:fs";
+// eslint-disable-next-line unicorn/import-style
+import * as path from "node:path";
+
+import { beforeAll, describe, expect, it } from "vitest";
+
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import PDFParser from "../pdf-import";
+
+// Define a variable to hold the PDF File
+let pdfFile: File;
+
+beforeAll(() => {
+  // Synchronously read the file from the local filesystem
+  const buffer = fs.readFileSync(path.resolve(__dirname, "testassets/resume.pdf"));
+
+  // Convert the buffer into a Blob-like object (This part is specifically for environments that support File API, like browsers. In pure Node.js you'd use buffers directly)
+  const blob = new Blob([buffer], { type: "application/pdf" });
+
+  // Convert the Blob into a File
+  pdfFile = new File([blob], "resume.pdf", { type: "application/pdf" });
+});
+
 describe("Hello World Test", () => {
   it("should return Hello World", () => {
     // eslint-disable-next-line unicorn/consistent-function-scoping
@@ -10,11 +31,14 @@ describe("Hello World Test", () => {
 });
 
 describe("PDFParser Tests", () => {
-  it("should initialize an empty PDFParser object", () => {
+  it("should initialize an empty PDFParser object and read the PDF file", async () => {
     const parser = new PDFParser();
-
-    // Initially, let's say we expect a method `parse` to exist, which doesn't yet
-    // expect(typeof parser.parse).toBe("function");
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    if (pdfFile) {
+      await parser.readFile(pdfFile);
+    } else {
+      throw new Error("PDF File is not loaded");
+    }
   });
 });
 

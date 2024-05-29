@@ -9,6 +9,10 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "types": ["jest"],
+    "baseUrl": ".",
+    "paths": {
+      "@reactive-resume/parser": ["libs/parser/src"]
+    }
   },
   "files": [],
   "include": [],
